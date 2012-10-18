@@ -1,0 +1,15 @@
+/********************************/
+/***A new kind of Tic Tac Toe****/
+/********************************/
+
+Created by Marshall Sumwalt
+
+In this new form of Tic Tac Toe you play on a 3D shape.
+In the first version there will be a cube with a TicTacToe board
+on each face.
+
+First game using OpenGl
+First time using GIT/GITHUB as well
+
+Contact:
+     MarshallSumwalt@gmail.com
