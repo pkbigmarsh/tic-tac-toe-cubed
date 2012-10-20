@@ -15,7 +15,7 @@ public:
 	void set(float, float, float);
 	bool set(float, int);
 
-	float operator[](const int index);
+	float operator[](const int);
 };
 
 #endif
