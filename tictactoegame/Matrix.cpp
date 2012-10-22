@@ -1,4 +1,6 @@
 #include "Matrix.h"
+#include "Point.h"
+#include "MyUtils.h"
 
 Matrix::Matrix()
 {
@@ -74,6 +76,55 @@ void Matrix::clear()
 			m[i][j] = 0;
 }
 
+void Matrix::translate(float tx, float ty, float tz)
+{
+	Matrix temp;
+	temp.set(0,3,tx);
+	temp.set(1,3,ty);
+	temp.set(2,3,tz);
+	*this *= temp;
+}
+
+void Matrix::scale(float sx, float sy, float sz)
+{
+	Matrix temp;
+	temp.set(0,0,sx);
+	temp.set(1,1,sy);
+	temp.set(2,2,sz);
+	*this *= temp;
+}
+
+void Matrix::rotate(float ax, float ay, float az)
+{
+	float radx = (PI / 180) * ax;
+	float rady = (PI / 180) * ay;
+	float radz = (PI / 180) * az;
+	Matrix rotation;
+	Matrix temp;
+	temp.set(1,1, cos(radx));
+	temp.set(1,2, -sin(radx));
+	temp.set(2,1, sin(radx));
+	temp.set(2,2, cos(radx));
+	rotation *= temp;
+
+	temp.setTransformation();
+	temp.set(0,0, cos(rady));
+	temp.set(2,0, -sin(rady));
+	temp.set(0,2, sin(rady));
+	temp.set(2,2, cos(rady));
+	rotation *= temp;
+
+	temp.setTransformation();
+	temp.set(0,0, cos(radz));
+	temp.set(0,1, -sin(radz));
+	temp.set(1,0, sin(radz));
+	temp.set(1,1, cos(radz));
+	rotation *= temp;
+
+	*this *= rotation;
+
+}
+
 Matrix Matrix::operator *(Matrix m2)
 {
 	Matrix result;
@@ -90,6 +141,18 @@ Matrix Matrix::operator *(Matrix m2)
 		}
 	}
 	return result;
+}
+
+void Matrix::operator *= (Matrix m2)
+{
+	*this = (*this * m2);
+}
+
+void Matrix::operator = (Matrix m2)
+{
+	for(int i = 0; i < 4; i ++)
+		for(int j = 0; j < 4; j ++)
+			m[i][j] = m2.at(i,j);
 }
 
 Point Matrix::operator*(Point p)

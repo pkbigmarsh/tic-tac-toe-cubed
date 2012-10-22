@@ -1,19 +1,12 @@
 #ifndef MYUTILS_H
 #define MYUTILS_H
-// My classes
-#include "Matrix.h"
-#include "Point.h"
 
 // Utility includes
+#include <windows.h>
 #include <math.h>
 #include <vector>
-#include <windows.h>
+#include <iostream>
 
-// OpenGL includes
-#include <gl/GL.h>
-#include <gl/GLU.h>
-#include <gl/GLUT.h>
-
-
+const float PI = 3.141592f;
 
 #endif

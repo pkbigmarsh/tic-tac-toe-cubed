@@ -1,9 +1,7 @@
 #ifndef MATIRX_H
 #define MATRIX_H
 
-#ifndef POINT_H
 #include "Point.h"
-#endif
 
 class Matrix
 {
@@ -23,8 +21,14 @@ public:
 	void setTransformation();
 	void clear();
 
+	void translate(float, float, float);
+	void rotate(float, float, float);
+	void scale(float, float, float);
+
 	Matrix operator*(Matrix);
 	Point operator*(Point);
+	void operator*=(Matrix);
+	void operator=(Matrix);
 };
 
 #endif
