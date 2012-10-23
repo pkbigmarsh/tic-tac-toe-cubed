@@ -2,7 +2,6 @@
 #define MYUTILS_H
 
 // Utility includes
-#include <windows.h>
 #include <math.h>
 #include <vector>
 #include <iostream>

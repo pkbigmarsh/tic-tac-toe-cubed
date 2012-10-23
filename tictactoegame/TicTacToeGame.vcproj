@@ -186,6 +186,10 @@
 				RelativePath=".\Point.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\RGBpixmap.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -214,6 +218,10 @@
 			</File>
 			<File
 				RelativePath=".\Point.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RGBpixmap.h"
 				>
 			</File>
 		</Filter>

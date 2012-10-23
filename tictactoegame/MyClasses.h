@@ -13,4 +13,8 @@
 #include "Face.h"
 #endif
 
+#ifndef RGBPIXMAP_H
+#include "RGBpixmap.h"
+#endif
+
 #endif
