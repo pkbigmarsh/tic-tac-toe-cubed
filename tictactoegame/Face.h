@@ -1,39 +1,39 @@
 #ifndef FACE_H
 #define FACE_H
 
-#include <vector>
-using namespace std;
+#include "RGBpixmap.h"
 
 class Face
 {
 private:
 	char grid[3][3];
-	Matrix CT;
-	vector<Point> outline;
 	int selRow;
 	int selCol;
 
+	int textLoc;
+	RGBpixmap * pic;
+
 	bool isEqual(char *);
+	void drawHighlight();
+
 
 public:
 	bool isComplete;
 	char holder;
 
 	Face();
-	Face(vector<Point>);
+	Face(int);
+	~Face();
 
 	bool checkCompleteness();
 	bool isOpen(int row, int col);
-	bool closerThan(Face);
+	bool set(int row, int col, char player);
 
 	void draw();
-	void setPoints(vector<Point>);
+	void bind();
+	int getName();
 	void highlight(float x, float y);
 	void clearHighlight();
-
-	void rotate(float, float, float);
-	void translate(float, float, float);
-	void scale(float, float, float);
 
 };
 
