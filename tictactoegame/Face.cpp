@@ -9,7 +9,7 @@ Face::Face()
 	selRow = -1;
 	selCol = -1;
 	isComplete = false;
-	holder = 0;
+	holder = 'X';
 	textLoc = 2000;
 	pic = new RGBpixmap(128, 128);
 }
@@ -164,8 +164,9 @@ void Face::draw()
 	blue.r = blue.g = 0;
 	blue.b = 255;
 
-	if(isComplete)
+	if(!isComplete)
 	{
+		
 		/***** Draw the Tic Tac Toe Board *****/
 		int buffer = 0;
 		for(int i = 0; i < 2; i ++)
@@ -234,6 +235,11 @@ void Face::clearHighlight()
 {
 	selRow = -1;
 	selCol = -1;
+}
+
+void Face::setName(int name)
+{
+	textLoc = name;
 }
 
 void Face::bind()

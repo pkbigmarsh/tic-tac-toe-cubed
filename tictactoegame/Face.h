@@ -32,6 +32,7 @@ public:
 	void draw();
 	void bind();
 	int getName();
+	void setName(int);
 	void highlight(float x, float y);
 	void clearHighlight();
 

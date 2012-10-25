@@ -10,6 +10,7 @@ private:
 	RGB* pixel;
 
 	bool inRange(int row, int col);
+	void outline();
 
 public:
 	int maxRow;

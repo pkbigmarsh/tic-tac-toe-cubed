@@ -6,6 +6,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 const float PI = 3.141592f;
 
 #endif

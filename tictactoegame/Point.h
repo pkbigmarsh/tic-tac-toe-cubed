@@ -12,7 +12,7 @@ public:
 	Point(float, float, float);
 
 	float at(int);
-	void set(float, float, float);
+	void set(float x, float y, float z);
 	bool set(float, int);
 
 	float operator[](const int);

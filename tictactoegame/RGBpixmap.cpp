@@ -43,6 +43,14 @@ void RGBpixmap::clear(RGB color)
 			pixel[pos ++] = color;
 }
 
+void RGBpixmap::outline()
+{
+	for(int i = 0; i < maxRow; i ++)
+	{
+		
+	}
+}
+
 void RGBpixmap::clear()
 {
 	RGB color;
@@ -70,13 +78,13 @@ void RGBpixmap::drawLine(int sRow, int sCol, int eRow, int eCol, int width, RGB 
 	if(!inRange(eRow, eCol))
 		return;
 	width --;
-	if(eRow < sRow)
+	if(eRow > sRow)
 	{
 		int temp = sRow;
 		eRow = sRow;
 		sRow = temp;
 	}
-	if(eCol  < sCol)
+	if(eCol  > sCol)
 	{
 		int temp = sCol;
 		eCol = sCol;
