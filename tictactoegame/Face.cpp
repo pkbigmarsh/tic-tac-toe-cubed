@@ -91,7 +91,7 @@ bool Face::set(int row, int col, char player)
 
 void Face::drawHighlight()
 {
-	RGB color;
+	mRGB color;
 	color.r = color.g = 255;
 	color.b = 0;
 	int ur = pic->maxRow;
@@ -151,10 +151,11 @@ void Face::drawHighlight()
 
 void Face::draw()
 {
-	pic->clear();
-	RGB black;
-	RGB blue;
-	RGB green;
+	pic->clear(outlineColor);
+	pic->outline(outlineColor);
+	mRGB black;
+	mRGB blue;
+	mRGB green;
 
 	black.r = black.g = black.b = 0;
 
@@ -164,6 +165,7 @@ void Face::draw()
 	blue.r = blue.g = 0;
 	blue.b = 255;
 
+	
 	if(!isComplete)
 	{
 		

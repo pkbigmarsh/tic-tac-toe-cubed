@@ -7,27 +7,29 @@ class RGBpixmap
 {
 private:
 	int nRows, nCols;
-	RGB* pixel;
 
 	bool inRange(int row, int col);
-	void outline();
 
 public:
 	int maxRow;
 	int maxCol;
+	
+	mRGB* pixel;
 
 	RGBpixmap();
 	RGBpixmap(int, int);
 	~RGBpixmap();
 
-	bool set(int row, int col, RGB);
-	RGB at(int row, int col);
+	void outline();
+	void outline(mRGB color);
+	bool set(int row, int col, mRGB);
+	mRGB at(int row, int col);
 	void setTexture(int);
 	void clear();
-	void clear(RGB);
+	void clear(mRGB);
 
-	void drawLine(int sRow, int sCol, int eRow, int eCol, int width, RGB);
-	void drawCircle(int sRow, int sCol, int radius, int width, RGB);
+	void drawLine(int sRow, int sCol, int eRow, int eCol, int width, mRGB);
+	void drawCircle(int sRow, int sCol, int radius, int width, mRGB);
 };
 
 #endif

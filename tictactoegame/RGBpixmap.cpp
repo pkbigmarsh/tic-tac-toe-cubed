@@ -14,7 +14,7 @@ RGBpixmap::RGBpixmap(int nR, int nC)
 	nCols = nC;
 	maxRow = nR - 1;
 	maxCol = nC - 1;
-	pixel = new RGB[nRows * nCols];
+	pixel = new mRGB[nRows * nCols];
 }
 
 RGBpixmap::~RGBpixmap()
@@ -22,7 +22,7 @@ RGBpixmap::~RGBpixmap()
 	delete pixel;
 }
 
-bool RGBpixmap::set(int row, int col, RGB p)
+bool RGBpixmap::set(int row, int col, mRGB p)
 {
 	if(row < 0 || row >= nRows || col < 0 || col >= nCols)
 		return false;
@@ -30,12 +30,12 @@ bool RGBpixmap::set(int row, int col, RGB p)
 	return true;
 }
 
-RGB RGBpixmap::at(int row, int col)
+mRGB RGBpixmap::at(int row, int col)
 {
 	return pixel[row * nCols + col];
 }
 
-void RGBpixmap::clear(RGB color)
+void RGBpixmap::clear(mRGB color)
 {
 	int pos = 0;
 	for(int i = 0; i < nRows; i ++)
@@ -45,15 +45,25 @@ void RGBpixmap::clear(RGB color)
 
 void RGBpixmap::outline()
 {
-	for(int i = 0; i < maxRow; i ++)
+	mRGB black;
+	black.r = black.g = black.b = 0;
+	outline(black);
+}
+
+void RGBpixmap::outline(mRGB color)
+{
+	for(int i = 0; i < maxRow + 1; i ++)
 	{
-		
+		set(0, i, color);
+		set(i, 0, color);
+		set(maxRow, i, color);
+		set(i, maxCol, color);
 	}
 }
 
 void RGBpixmap::clear()
 {
-	RGB color;
+	mRGB color;
 	color.r = color.b = color.g = 255;
 	clear(color);
 }
@@ -65,43 +75,44 @@ bool RGBpixmap::inRange(int row, int col)
 
 void RGBpixmap::setTexture(int name)
 {
+	//glEnable( GL_TEXTURE_2D );
 	glBindTexture(GL_TEXTURE_2D, name);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, nCols, nRows, 0, GL_RGB, GL_UNSIGNED_BYTE, pixel);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, nCols, nRows, 0, GL_RGB, GL_UNSIGNED_BYTE, pixel);
 }
 
-void RGBpixmap::drawLine(int sRow, int sCol, int eRow, int eCol, int width, RGB color)
+void RGBpixmap::drawLine(int sRow, int sCol, int eRow, int eCol, int width, mRGB color)
 {
 	if(!inRange(sRow, sCol))
 		return;
 	if(!inRange(eRow, eCol))
 		return;
-	width --;
-	if(eRow > sRow)
+	//width --;
+	if(eRow < sRow)
 	{
-		int temp = sRow;
+		int temp = eRow;
 		eRow = sRow;
 		sRow = temp;
 	}
-	if(eCol  > sCol)
+	if(eCol < sCol)
 	{
-		int temp = sCol;
+		int temp = eCol;
 		eCol = sCol;
 		sCol = temp;
 	}
-	double dy = (double) (eCol - sCol);
-	double dx = (double) (eRow - sRow);
+	double dy = (double) (sCol - eCol);
+	double dx = (double) (sRow - eRow);
 	if(dy == 0)
 	{
 		for(int i = sRow; i < eRow; i ++)
-			for(int j = sCol; j + width; j ++)
+			for(int j = sCol; j < sCol + width; j ++)
 				set(i, j, color);
 	}
 	else if(dx == 0)
 	{
 		for(int i = sCol; i < eCol; i ++)
-			for(int j = sRow; j + eRow; j ++)
+			for(int j = sRow; j < sRow + width; j ++)
 				set(j, i, color);
 	}
 	else
@@ -124,7 +135,7 @@ void RGBpixmap::drawLine(int sRow, int sCol, int eRow, int eCol, int width, RGB 
 	}
 }
 
-void RGBpixmap::drawCircle(int sRow, int sCol, int radius, int width, RGB color)
+void RGBpixmap::drawCircle(int sRow, int sCol, int radius, int width, mRGB color)
 {
 	if(!inRange(sRow, sCol))
 		return;

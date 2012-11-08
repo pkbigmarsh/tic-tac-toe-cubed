@@ -10,6 +10,7 @@ class Cube
 private:
 	Face * faces;
 	Point vertices[2][2][2];
+	mRGB faceColors[6];
 	//Matrix CT;
 	float x, y, z;
 

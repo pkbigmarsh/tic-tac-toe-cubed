@@ -7,6 +7,6 @@
 #include <gl/GLU.h>
 #include <gl/GLUT.h>
 
-struct RGB{unsigned char r, g, b;};
+struct mRGB{unsigned char r, g, b;};
 
 #endif

@@ -21,6 +21,8 @@ public:
 	bool isComplete;
 	char holder;
 
+	mRGB outlineColor;
+
 	Face();
 	Face(int);
 	~Face();
